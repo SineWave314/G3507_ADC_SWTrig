@@ -7,5 +7,6 @@
 
 void SysTick_Handler(void);
 void ADC0_IRQHandler(void);
+void ADC1_IRQHandler(void);
 
 #endif /* #ifndef __INTERRUPTS_H__ */
