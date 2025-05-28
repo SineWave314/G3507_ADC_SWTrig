@@ -31,11 +31,14 @@
  */
 
 #include "ti_msp_dl_config.h"
+#include "UserTask.h"
 
 int main(void)
 {
     SYSCFG_DL_init();
 
+    UserTask_init();
     while (1) {
+        UserTask_loop();
     }
 }
