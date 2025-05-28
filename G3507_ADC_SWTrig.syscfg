@@ -9,6 +9,8 @@
 /**
  * Import the modules used in this configuration.
  */
+const ADC12         = scripting.addModule("/ti/driverlib/ADC12", {}, false);
+const ADC121        = ADC12.addInstance();
 const GPIO          = scripting.addModule("/ti/driverlib/GPIO", {}, false);
 const GPIO1         = GPIO.addInstance();
 const SYSCTL        = scripting.addModule("/ti/driverlib/SYSCTL");
@@ -42,15 +44,25 @@ pinFunction4.peripheral.$assign           = "SYSCTL";
 pinFunction4.peripheral.hfxInPin.$assign  = "j17_expansion.4";
 pinFunction4.peripheral.hfxOutPin.$assign = "j17_expansion.5";
 
-GPIO1.$name                               = "GPIO_LED";
-GPIO1.associatedPins[0].launchPadShortcut = "LED1En";
-GPIO1.associatedPins[0].$name             = "LED1";
-GPIO1.associatedPins[0].initialValue      = "SET";
+ADC121.$name                             = "ADC0";
+ADC121.sampClkSrc                        = "DL_ADC12_CLOCK_HFCLK";
+ADC121.sampleTime0                       = "1 us";
+ADC121.powerDownMode                     = "DL_ADC12_POWER_DOWN_MODE_MANUAL";
+ADC121.enabledInterrupts                 = ["DL_ADC12_INTERRUPT_MEM0_RESULT_LOADED"];
+ADC121.peripheral.$assign                = "ADC0";
+ADC121.peripheral.adcPin0.$assign        = "boosterpack.8";
+ADC121.adcPin0Config.$name               = "ti_driverlib_gpio_GPIOPinGeneric0";
+ADC121.adcPin0Config.hideOutputInversion = scripting.forceWrite(false);
 
 const Board                       = scripting.addModule("/ti/driverlib/Board", {}, false);
 Board.peripheral.$assign          = "DEBUGSS";
 Board.peripheral.swclkPin.$assign = "j25_expansion.16";
 Board.peripheral.swdioPin.$assign = "j25_expansion.14";
+
+GPIO1.$name                               = "GPIO_LED";
+GPIO1.associatedPins[0].launchPadShortcut = "LED1En";
+GPIO1.associatedPins[0].$name             = "LED1";
+GPIO1.associatedPins[0].initialValue      = "SET";
 
 SYSCTL.clockTreeEn = true;
 
