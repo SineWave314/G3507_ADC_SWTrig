@@ -1,16 +1,9 @@
-## Example Summary
+# MSPM0G3507 ADC软件触发测试
 
-Empty project using DriverLib.
-This example shows a basic empty project using DriverLib with just main file
-and SysConfig initialization.
+使用开发板：MSPM0G3507 LaunchPad
 
-### Low-Power Recommendations
-TI recommends to terminate unused pins by setting the corresponding functions to
-GPIO and configure the pins to output low or input with internal
-pullup/pulldown resistor.
+# 外设配置
 
-SysConfig allows developers to easily configure unused pins by selecting **Board**→**Configure Unused Pins**.
+ADC0：单通道软件触发
 
-## Example Usage
-
-Compile, load and run the example.
+ADC1：4通道序列软件触发
