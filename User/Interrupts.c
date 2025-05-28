@@ -15,3 +15,14 @@ void ADC0_IRQHandler(void) {
             break;
     }
 }
+
+// ADC1中断服务函数
+void ADC1_IRQHandler(void) {
+    switch (DL_ADC12_getPendingInterrupt(ADC1_INST)) {
+        case DL_ADC12_IIDX_MEM3_RESULT_LOADED:
+            ADC1_mem3ResultLoadedCallback();
+            break;
+        default:
+            break;
+    }
+}
